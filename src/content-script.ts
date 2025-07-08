@@ -9,13 +9,8 @@ class TextAIExtension {
     constructor() {
         this.selectionHandler = new SelectionHandler();
         this.modal = new Modal();
-        this.init();
     }
 
-    private init() {
-        console.log('Mimir is watching');
-
-    }
 }
 
 // Initialize the extension

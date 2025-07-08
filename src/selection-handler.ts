@@ -44,7 +44,6 @@ export class SelectionHandler {
             rect,
         };
 
-        console.log("Text selected: ", selectedText);
         this.showButton();
     }
 
@@ -115,7 +114,6 @@ export class SelectionHandler {
 
         // Add to page
         document.body.appendChild(this.selectionButton);
-        console.log('Button shown for text:', this.currentSelection.text);
     }
 
     private hideButton() {
