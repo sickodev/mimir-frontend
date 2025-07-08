@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+.extension-button {
+    z-index: 9999;
+}
+
+.extension-modal {
+    z-index: 10000;
+}
