@@ -1,14 +1,18 @@
+import { Modal } from "./modal";
 import type { SelectionData } from "./types";
 
 export class SelectionHandler {
     private currentSelection: SelectionData | null = null;
     private selectionButton: HTMLElement | null = null;
+    private modal: Modal;
 
     constructor() {
+        this.modal = new Modal();
         this.init();
     }
 
     private init() {
+        this.modal.create();
         document.addEventListener("mouseup", this.handleMouseUp.bind(this));
     }
 
@@ -21,7 +25,6 @@ export class SelectionHandler {
     private checkSelection() {
         const selection = window.getSelection();
         if (!selection || selection.isCollapsed) {
-            console.log("No text selected");
             this.hideButton();
             this.currentSelection = null;
             return;
@@ -29,7 +32,6 @@ export class SelectionHandler {
 
         const selectedText = selection.toString().trim();
         if (selectedText.length === 0) {
-            console.log("Empty Selection");
             this.hideButton();
             this.currentSelection = null;
             return;
@@ -49,7 +51,7 @@ export class SelectionHandler {
 
     private showButton() {
         if (!this.currentSelection) return;
-
+        if (!this.modal) return;
         this.hideButton();
 
         // Create a simple div with inline styles
@@ -107,12 +109,9 @@ export class SelectionHandler {
 
         // Add click handler for testing
         this.selectionButton.addEventListener("click", () => {
-            console.log('Processing selected text:', this.currentSelection?.text);
-            // This is where you'd add your actual processing logic
-            alert(`Processing: "${this.currentSelection?.text}"`);
+            this.modal?.show()
         });
 
-        // Add to page
         document.body.appendChild(this.selectionButton);
     }
 
@@ -120,7 +119,6 @@ export class SelectionHandler {
         if (this.selectionButton) {
             this.selectionButton.remove();
             this.selectionButton = null;
-            console.log("Button Hidden");
         }
     }
 
